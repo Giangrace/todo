@@ -41,3 +41,16 @@ async function handleRequest(request) {
     // 404 Not Found
     return new Response('Not Found', { status: 404 });
 }
+{
+  "name": "my-node-application",
+  "version": "1.0.0",
+  "description": "Node.js app for Wasmer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "wasmer deploy"
+  },
+  "keywords": ["wasmer", "edge", "webassembly"],
+  "author": "Your Name",
+  "license": "MIT"
+}

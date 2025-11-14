@@ -1,13 +1,15 @@
 [package]
-name = "my-app"
+name = "my-static-website"
 version = "0.1.0"
-description = "My application"
+description = "My awesome static website"
+license = "MIT"
+readme = "README.md"
 
 [dependencies]
 "wasmer/static-web-server" = "^1"
 
 [[module]]
-name = "my-app"
+name = "my-static-website"
 source = "."
 abi = "none"
 
@@ -20,4 +22,8 @@ module = "wasmer/static-web-server:webserver"
 runner = "wasi"
 
 [command.annotations.wasi]
-main-args = ["-w", "."]
+main-args = ["-w", ".", "-p", "8080"]
+env = []
+
+[fs]
+"/public" = "."

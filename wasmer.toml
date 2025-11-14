@@ -1,0 +1,23 @@
+[package]
+name = "my-app"
+version = "0.1.0"
+description = "My application"
+
+[dependencies]
+"wasmer/static-web-server" = "^1"
+
+[[module]]
+name = "my-app"
+source = "."
+abi = "none"
+
+[module.interfaces]
+wasi = "0.1.0"
+
+[[command]]
+name = "script"
+module = "wasmer/static-web-server:webserver"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = ["-w", "."]

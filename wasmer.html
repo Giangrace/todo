@@ -4,15 +4,263 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Wasmer App</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 10px 5px;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #f7f7f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .info-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .counter {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Wasmer Deployed Site!</h1>
-    </header>
-    <main>
-        <p>This site is deployed on Wasmer Edge.</p>
-    </main>
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>🚀 Successfully Deployed!</h1>
+        
+        <p>Congratulations! Your application is now running on <strong>Wasmer Edge</strong>.</p>
+        
+        <div class="badge">WebAssembly Powered</div>
+        <div class="badge">Edge Computing</div>
+        <div class="badge">Lightning Fast</div>
+
+        <div class="info-box">
+            <h3>✨ What You've Achieved:</h3>
+            <ul>
+                <li>Deployed your first Wasmer application</li>
+                <li>Running on WebAssembly infrastructure</li>
+                <li>Globally distributed edge network</li>
+                <li>Ultra-low latency delivery</li>
+            </ul>
+        </div>
+
+        <div id="successMessage" class="success-message">
+            Button clicked successfully! 🎉
+        </div>
+
+        <div class="counter" id="counter">0</div>
+
+        <button onclick="incrementCounter()">Click Me!</button>
+        <button onclick="showMessage()">Show Message</button>
+
+        <div class="footer">
+            <p>Powered by Wasmer | Deployed: <span id="deployTime"></span></p>
+            <p>Server Location: <span id="location">Global Edge Network</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize counter
+        let count = 0;
+
+        // Set deploy time
+        document.getElementById('deployTime').textContent = new Date().toLocaleString();
+
+        // Counter function
+        function incrementCounter() {
+            count++;
+            document.getElementById('counter').textContent = count;
+            
+            // Add animation effect
+            const counterElement = document.getElementById('counter');
+            counterElement.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                counterElement.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Show message function
+        function showMessage() {
+            const message = document.getElementById('successMessage');
+            message.classList.add('show');
+            
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
+
+        // Detect user's approximate location (time zone)
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById('location').textContent = timezone;
+
+        // Add some interactivity - keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                incrementCounter();
+            }
+        });
+
+        // Console greeting
+        console.log('%c🚀 Welcome to Wasmer!', 'font-size: 20px; color: #667eea; font-weight: bold;');
+        console.log('%cYour app is running on WebAssembly Edge Infrastructure', 'font-size: 14px; color: #764ba2;');
+    </script>
 </body>
 </html>
